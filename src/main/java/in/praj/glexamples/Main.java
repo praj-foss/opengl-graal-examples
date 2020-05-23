@@ -29,6 +29,8 @@ public class Main {
             return;
         }
 
+        GLFW.setKeyCallback(window, GLFW.keyfun.getFunctionPointer());
+
         GLFW.makeContextCurrent(window);
         while (! GLFW.windowShouldClose(window)) {
             GLFW.swapBuffers(window);

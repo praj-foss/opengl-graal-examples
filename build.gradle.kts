@@ -25,6 +25,10 @@ repositories {
 }
 
 dependencies {
-    compileOnly("org.graalvm.sdk", "graal-sdk", graal.graalVersion.get())
+    val graalVer = graal.graalVersion.get()
+
+    compileOnly("org.graalvm.sdk", "graal-sdk", graalVer)
+    compileOnly("org.graalvm.nativeimage", "svm", graalVer)
+
     testImplementation("junit", "junit", "4.12")
 }
