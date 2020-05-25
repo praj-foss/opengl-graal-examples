@@ -1,2 +1,2 @@
-rootProject.name = "opengl-examples"
+rootProject.name = "opengl-graal-examples"
 
