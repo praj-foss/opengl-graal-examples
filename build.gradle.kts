@@ -34,6 +34,5 @@ dependencies {
 }
 
 tasks.register<Exec>("runNative") {
-    dependsOn("nativeImage")
     commandLine("$buildDir/graal/${graal.outputName.get()}")
 }
