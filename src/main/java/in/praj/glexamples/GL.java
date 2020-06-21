@@ -1,8 +1,3 @@
-/**
- * This file is licensed under the MIT license.
- * See the LICENSE file in project root for details.
- */
-
 package in.praj.glexamples;
 
 import org.graalvm.nativeimage.c.CContext;
@@ -10,6 +5,9 @@ import org.graalvm.nativeimage.c.constant.CConstant;
 import org.graalvm.nativeimage.c.function.CFunction;
 import org.graalvm.nativeimage.c.type.CFloatPointer;
 
+/**
+ * Bindings to libGL.
+ */
 @CContext(Main.Directives.class)
 class GL {
     @CConstant("GL_COLOR_BUFFER_BIT")

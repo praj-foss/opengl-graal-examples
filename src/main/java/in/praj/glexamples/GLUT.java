@@ -1,8 +1,3 @@
-/**
- * This file is licensed under the MIT license.
- * See the LICENSE file in project root for details.
- */
-
 package in.praj.glexamples;
 
 import org.graalvm.nativeimage.c.CContext;
@@ -14,6 +9,9 @@ import org.graalvm.nativeimage.c.type.CCharPointer;
 import org.graalvm.nativeimage.c.type.CCharPointerPointer;
 import org.graalvm.nativeimage.c.type.CIntPointer;
 
+/**
+ * Bindings to libglut.
+ */
 @CContext(Main.Directives.class)
 class GLUT {
     @CConstant("GLUT_SINGLE")
@@ -55,6 +53,9 @@ class GLUT {
     @CFunction("glutWireTeapot")
     static native void wireTeapot(double size);
 
+    /**
+     * Describes the signature of a no-args callback function.
+     */
     interface Callback extends CFunctionPointer {
         @InvokeCFunctionPointer void invoke();
     }

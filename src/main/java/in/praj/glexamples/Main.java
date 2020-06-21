@@ -1,8 +1,3 @@
-/**
- * This file is licensed under the MIT license.
- * See the LICENSE file in project root for details.
- */
-
 package in.praj.glexamples;
 
 import com.oracle.svm.core.c.CGlobalData;
@@ -14,8 +9,6 @@ import org.graalvm.nativeimage.StackValue;
 import org.graalvm.nativeimage.c.CContext;
 import org.graalvm.nativeimage.c.function.CEntryPoint;
 import org.graalvm.nativeimage.c.function.CEntryPointLiteral;
-import org.graalvm.nativeimage.c.function.CFunctionPointer;
-import org.graalvm.nativeimage.c.function.InvokeCFunctionPointer;
 import org.graalvm.nativeimage.c.type.CFloatPointer;
 import org.graalvm.nativeimage.c.type.CIntPointer;
 import org.graalvm.nativeimage.c.type.CTypeConversion;
@@ -29,6 +22,9 @@ import java.util.List;
  */
 @CContext(Main.Directives.class)
 public class Main {
+    /**
+     * Sets up the context required for interacting with native libraries.
+     */
     public static final class Directives implements CContext.Directives {
         @Override
         public List<String> getHeaderFiles() {
@@ -78,9 +74,16 @@ public class Main {
         GLUT.mainLoop();
     }
 
-    // Global variable to store rotation angle
+    /**
+     * Holds a pointer to an off-heap global variable that stores
+     * the angle of rotation. The angle is represented as a float.
+     */
     private static final CGlobalData<CFloatPointer> rotation = CGlobalDataFactory.createBytes(() -> 4);
 
+    /**
+     * Creates a callback function for {@link GLUT#displayFunc(GLUT.Callback)}.
+     * It must have the same signature as {@link GLUT.Callback#invoke()}.
+     */
     @CEntryPoint
     @CEntryPointOptions(prologue = CEntryPointSetup.EnterCreateIsolatePrologue.class,
                         epilogue = CEntryPointSetup.LeaveTearDownIsolateEpilogue.class)
@@ -97,9 +100,17 @@ public class Main {
 
         GL.flush();
     }
+
+    /**
+     * Holds the pointer to {@link Main#display()} function.
+     */
     private static final CEntryPointLiteral<GLUT.Callback> displayCallback =
             CEntryPointLiteral.create(Main.class, "display");
 
+    /**
+     * Creates a callback function for {@link GLUT#idleFunc(GLUT.Callback)}.
+     * It must have the same signature as {@link GLUT.Callback#invoke()}.
+     */
     @CEntryPoint
     @CEntryPointOptions(prologue = CEntryPointSetup.EnterCreateIsolatePrologue.class,
                         epilogue = CEntryPointSetup.LeaveTearDownIsolateEpilogue.class)
@@ -108,6 +119,10 @@ public class Main {
         rotPtr.write(0.1f + rotPtr.read());
         GLUT.postRedisplay();
     }
+
+    /**
+     * Holds the pointer to {@link Main#idle()} function.
+     */
     private static final CEntryPointLiteral<GLUT.Callback> idleCallback =
             CEntryPointLiteral.create(Main.class, "idle");
 }
