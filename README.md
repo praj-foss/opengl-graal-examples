@@ -7,13 +7,13 @@ Demo of a rotating Utah teapot, built using OpenGL and
 
 It's written completely in Java and uses GraalVM's native-image 
 utility to compile down to a stand-alone native binary as small 
-as **6mb**. This binary does not require any Java runtime and launch
-as fast as their native equivalents written in C/C++. The source
-code is almost a direct translation of the examples from
+as **6mb**. This binary does not require any Java runtime and 
+launches as fast as counterparts written in C/C++. The source
+code is almost a direct translation of examples from
 [Rosetta Code](https://rosettacode.org/wiki/OpenGL/Utah_Teapot).
 
 ## Building
-You'll need JDK 11 or higher installed. The project uses Gradle, 
+You'll need JDK 11 or higher installed. This project uses Gradle, 
 and it should automatically download the GraalVM distribution for
 you. Use the following command to build:
 ```shell script
@@ -29,3 +29,7 @@ or run it directly as:
 ```shell script
 ./build/graal/glExample
 ```
+
+It works perfectly on 64-bit Linux and should work on other systems
+as well, though you might need to make minor modifications to the
+bindings.
