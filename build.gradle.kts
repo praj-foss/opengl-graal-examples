@@ -16,8 +16,10 @@ graal {
 
     mainClass("in.praj.glexamples.Main")
     outputName("glExample")
+    option("--no-fallback")
     option("--verbose")
     option("--no-server")
+    option("-H:+ReportExceptionStackTraces")
 }
 
 repositories {
@@ -29,6 +31,9 @@ dependencies {
 
     compileOnly("org.graalvm.sdk", "graal-sdk", graalVer)
     compileOnly("org.graalvm.nativeimage", "svm", graalVer)
+}
 
-    testImplementation("junit", "junit", "4.12")
+tasks.register<Exec>("runNative") {
+    dependsOn("nativeImage")
+    commandLine("$buildDir/graal/${graal.outputName.get()}")
 }

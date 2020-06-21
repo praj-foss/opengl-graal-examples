@@ -3,7 +3,7 @@
  * See the LICENSE file in project root for details.
  */
 
-package in.praj.glexamples;
+package in.praj.glexamples.glfw;
 
 import com.oracle.svm.core.c.function.CEntryPointOptions;
 import com.oracle.svm.core.c.function.CEntryPointSetup;
